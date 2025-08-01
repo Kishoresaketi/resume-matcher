@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Resume Analysis Result</title>
+</head>
+<body>
+    <h1>Resume Match Result</h1>
+
+    <div th:if="${error}">
+        <p style="color:red">Error: <span th:text="${error}"></span></p>
+    </div>
+
+    <div th:if="${result}">
+        <p><strong>Overall Match:</strong> <span th:text="${result.overallMatchPercentage} + '%'"></span></p>
+        <p><strong>ATS Score:</strong> <span th:text="${result.atsScore}"></span></p>
+        <p><strong>Tech Match:</strong> <span th:text="${result.technicalSkillsMatch}"></span></p>
+        <p><strong>Experience Match:</strong> <span th:text="${result.experienceLevelMatch}"></span></p>
+        <p><strong>Soft Skills Match:</strong> <span th:text="${result.softSkillsMatch}"></span></p>
+        <p><strong>Industry Relevance:</strong> <span th:text="${result.industryRelevance}"></span></p>
+
+        <h3>Matched Skills</h3>
+        <ul>
+            <li th:each="skill : ${result.matchedSkills}" th:text="${skill}"></li>
+        </ul>
+
+        <h3>Missing Critical Skills</h3>
+        <ul>
+            <li th:each="skill : ${result.missingCriticalSkills}" th:text="${skill}"></li>
+        </ul>
+
+        <h3>Experience Assessment</h3>
+        <p th:text="${result.experienceAssessment}"></p>
+
+        <h3>Recommendations</h3>
+        <ul>
+            <li th:each="tip : ${result.improvementRecommendations}" th:text="${tip}"></li>
+        </ul>
+
+        <h3>Semantic Insights</h3>
+        <p th:text="${result.semanticInsights}"></p>
+
+        <h3>Confidence Score</h3>
+        <p th:text="${result.confidenceScore}"></p>
+
+        <h3>Reasoning</h3>
+        <p th:text="${result.reasoning}"></p>
+
+        <h4>Debug Info</h4>
+        <p><strong>Name:</strong> <span th:text="${result.debugInfo.name}"></span></p>
+        <p><strong>Email:</strong> <span th:text="${result.debugInfo.email}"></span></p>
+        <p><strong>Processing Time:</strong> <span th:text="${result.debugInfo.processingTimeMs} + ' ms'"></span></p>
+    </div>
+</body>
+</html>

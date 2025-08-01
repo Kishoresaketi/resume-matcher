@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Resume Analysis Result</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; background: #f8f8f8; }
+        .container { background: white; padding: 20px; border-radius: 8px; max-width: 900px; margin: auto; }
+        h1, h2, h3 { border-bottom: 1px solid #ddd; padding-bottom: 5px; }
+        ul { padding-left: 20px; }
+        p, li { margin: 5px 0; }
+        .section { margin-top: 20px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Resume Match Result</h1>
+
+    <div th:if="${result}">
+        <div class="section">
+            <p><strong>Overall Match:</strong> <span th:text="${result.overallMatchPercentage} + '%'"></span></p>
+            <p><strong>ATS Score:</strong> <span th:text="${result.atsScore} + '%'"></span></p>
+            <p><strong>Technical Skills Match:</strong> <span th:text="${result.technicalSkillsMatch} + '%'"></span></p>
+            <p><strong>Experience Match:</strong> <span th:text="${result.experienceLevelMatch} + '%'"></span></p>
+            <p><strong>Soft Skills Match:</strong> <span th:text="${result.softSkillsMatch} + '%'"></span></p>
+            <p><strong>Industry Relevance:</strong> <span th:text="${result.industryRelevance} + '%'"></span></p>
+        </div>
+
+        <div class="section">
+            <h3>Matched Skills</h3>
+            <ul>
+                <li th:each="skill : ${result.matchedSkills}" th:text="${skill}"></li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>Missing Critical Skills</h3>
+            <ul>
+                <li th:each="skill : ${result.missingCriticalSkills}" th:text="${skill}"></li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>Experience Assessment</h3>
+            <p th:text="${result.experienceAssessment}"></p>
+        </div>
+
+        <div class="section">
+            <h3>Improvement Recommendations</h3>
+            <ul>
+                <li th:each="recommendation : ${result.improvementRecommendations}" th:text="${recommendation}"></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>
